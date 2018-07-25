@@ -13,7 +13,7 @@ def getWordlist(wordlistFilename):
 
 def isCorrectPassword(password, filename):
     try:
-        output = run("gpg --batch --yes --passphrase " + password + " -d " + filename + " 2>&1", shell=True)   #shell injection potential, do not run on untrusted input
+        output = run("gpg --pinentry-mode loopback --batch --yes --passphrase " + password + " -d " + filename + " 2>&1", shell=True)   #shell injection potential, do not run on untrusted input
         if "decryption failed:" in output:
             return False
         else:
